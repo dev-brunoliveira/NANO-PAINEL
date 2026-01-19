@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Área Restrita</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: #fff;
+            width: 100%;
+            max-width: 380px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .login-container p {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .campo input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .campo input:focus {
+            border-color: #1f4037;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #1f4037;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #16332c;
+        }
+
+        .erro {
+            color: #d00000;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Bem-vindo Gafanhoto</h2>
+    <p>Acesso restrito</p>
+
+    <div class="campo">
+        <label>Usuário do NanoEmpresa</label>
+        <input type="text" id="usuario" placeholder="Digite seu usuário">
+    </div>
+
+    <div class="campo">
+        <label>Senha</label>
+        <input type="password" id="senha" placeholder="Digite sua senha">
+    </div>
+
+    <button onclick="login()">Entrar</button>
+
+    <div class="erro" id="erro">Usuário ou senha inválidos</div>
+
+    <div class="footer">
+        © 2025 - Sistema interno
+    </div>
+</div>
+
+<script>
+    const usuarios = [
+        { user: "Bruno", pass: "2208" },
+        { user: "Feliped", pass: "0000" },
+        { user: "Maikon", pass: "1234" },
+        { user: "Bryan", pass: "1234" },
+        { user: "Vitor", pass: "0712" },
+        { user: "Victor", pass: "101522" },
+        { user: "Sofia", pass: "1234" },
+        { user: "Jessica", pass: "0000" }
+    ];
+
+    function login() {
+        const u = document.getElementById("usuario").value.trim();
+        const s = document.getElementById("senha").value.trim();
+        const erro = document.getElementById("erro");
+
+        const valido = usuarios.find(item =>
+            item.user.toLowerCase() === u.toLowerCase() &&
+            item.pass === s
+        );
+
+        if (valido) {
+            sessionStorage.setItem("logado", "true");
+            sessionStorage.setItem("usuario", u);
+            window.location.href = "pagina.html";
+        } else {
+            erro.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
